@@ -6,13 +6,23 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.LayerDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
+import android.text.style.RelativeSizeSpan
+import android.text.style.StyleSpan
 import android.util.TypedValue
 import android.view.Gravity
+import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Button
@@ -26,8 +36,21 @@ data class Cat(val id: String, val names: List<String>) // PL, EN, LV
 
 class MainActivity : Activity() {
 
+    // ---------- kolory (styl zbliżony do aplikacji nawigacji) ----------
+    private val cBg = Color.parseColor("#0E151D")
+    private val cCard = Color.parseColor("#19222D")
+    private val cCardSel = Color.parseColor("#1F2C3B")
+    private val cStroke = Color.parseColor("#2B394B")
+    private val cText = Color.parseColor("#E9EFF6")
+    private val cSub = Color.parseColor("#93A1B3")
+    private val cGreen = Color.parseColor("#22C55E")
+    private val cLv = Color.parseColor("#7DD3A8")
+    private val cBar = Color.parseColor("#121A24")
+
     // ---------- dane ----------
     private val cats = listOf(
+        Cat("greenhouse", listOf("Szklarnia (praca przy pomidorach)", "Greenhouse (tomato work)", "Siltumnīca (darbs ar tomātiem)")),
+        Cat("lab", listOf("Laboratorium (analizy nasion)", "Laboratory (seed testing)", "Laboratorija (sēklu analīzes)")),
         Cat("work", listOf("Praca", "Work", "Darbs")),
         Cat("travel", listOf("Podróż", "Travel", "Ceļojumi")),
         Cat("shop", listOf("Sklep i zakupy", "Shops and shopping", "Veikals un pirkumi")),
@@ -47,29 +70,29 @@ class MainActivity : Activity() {
         "title" to listOf("Rozmówki EN–LV", "Phrasebook EN–LV", "Sarunvārdnīca EN–LV"),
         "points" to listOf("Punkty", "Points", "Punkti"),
         "streak" to listOf("Najlepsza seria", "Best streak", "Labākā sērija"),
-        "lang" to listOf("Język menu", "Menu language", "Izvēlnes valoda"),
-        "level" to listOf("Poziom", "Level", "Līmenis"),
+        "lang" to listOf("JĘZYK MENU", "MENU LANGUAGE", "IZVĒLNES VALODA"),
+        "level" to listOf("POZIOM", "LEVEL", "LĪMENIS"),
         "allLevels" to listOf("Wszystkie", "All", "Visi"),
-        "speed" to listOf("Tempo mowy", "Speech speed", "Runas ātrums"),
+        "speed" to listOf("TEMPO MOWY", "SPEECH SPEED", "RUNAS ĀTRUMS"),
         "slow" to listOf("Wolno", "Slow", "Lēni"),
         "normal" to listOf("Normalnie", "Normal", "Normāli"),
-        "cats" to listOf("Kategorie", "Categories", "Kategorijas"),
-        "game" to listOf("🎮 Wyzwanie: wszystkie kategorie", "🎮 Challenge: all categories", "🎮 Izaicinājums: visas kategorijas"),
-        "cont" to listOf("▶ Słuchanie ciągłe", "▶ Continuous listening", "▶ Nepārtraukta klausīšanās"),
-        "quiz" to listOf("🎮 Quiz z tej kategorii", "🎮 Quiz for this category", "🎮 Viktorīna šajā kategorijā"),
-        "list" to listOf("Zdania (dotknij, aby posłuchać)", "Sentences (tap to listen)", "Teikumi (pieskarieties, lai klausītos)"),
-        "back" to listOf("← Wstecz", "← Back", "← Atpakaļ"),
-        "stop" to listOf("■ Stop", "■ Stop", "■ Stop"),
+        "cats" to listOf("KATEGORIE", "CATEGORIES", "KATEGORIJAS"),
+        "game" to listOf("🎮  Wyzwanie: wszystkie kategorie", "🎮  Challenge: all categories", "🎮  Izaicinājums: visas kategorijas"),
+        "cont" to listOf("▶  Słuchanie ciągłe", "▶  Continuous listening", "▶  Nepārtraukta klausīšanās"),
+        "quiz" to listOf("🎮  Quiz z tej kategorii", "🎮  Quiz for this category", "🎮  Viktorīna šajā kategorijā"),
+        "list" to listOf("ZDANIA (DOTKNIJ, ABY POSŁUCHAĆ)", "SENTENCES (TAP TO LISTEN)", "TEIKUMI (PIESKARIETIES, LAI KLAUSĪTOS)"),
+        "back" to listOf("‹  Wstecz", "‹  Back", "‹  Atpakaļ"),
+        "stop" to listOf("■  Stop", "■  Stop", "■  Stop"),
         "shuffle" to listOf("Losowo", "Shuffle", "Jaukti"),
         "order" to listOf("Po kolei", "In order", "Pēc kārtas"),
-        "gap" to listOf("Przerwa", "Pause", "Pauze"),
+        "gap" to listOf("PRZERWA", "PAUSE", "PAUZE"),
         "short" to listOf("Krótka", "Short", "Īsa"),
         "long" to listOf("Długa", "Long", "Gara"),
-        "listenOnly" to listOf("Tylko słuch (bez tekstu)", "Listening only (no text)", "Tikai klausīšanās (bez teksta)"),
+        "listenOnly" to listOf("Tylko słuch", "Listening only", "Tikai klausīšanās"),
         "showText" to listOf("Pokaż tekst", "Show text", "Rādīt tekstu"),
-        "repeat" to listOf("🔊 Powtórz", "🔊 Repeat", "🔊 Atkārtot"),
-        "pickLv" to listOf("Wybierz tłumaczenie łotewskie:", "Choose the Latvian translation:", "Izvēlieties tulkojumu latviski:"),
-        "next" to listOf("Dalej →", "Next →", "Tālāk →"),
+        "repeat" to listOf("🔊  Powtórz", "🔊  Repeat", "🔊  Atkārtot"),
+        "pickLv" to listOf("WYBIERZ TŁUMACZENIE ŁOTEWSKIE", "CHOOSE THE LATVIAN TRANSLATION", "IZVĒLIETIES TULKOJUMU LATVIEŠU VALODĀ"),
+        "next" to listOf("Dalej  →", "Next  →", "Tālāk  →"),
         "question" to listOf("Pytanie", "Question", "Jautājums"),
         "good" to listOf("✔ Dobrze!", "✔ Correct!", "✔ Pareizi!"),
         "bad" to listOf("✘ Źle. Poprawna odpowiedź jest zaznaczona.", "✘ Wrong. The correct answer is marked.", "✘ Nepareizi. Pareizā atbilde ir atzīmēta."),
@@ -85,7 +108,26 @@ class MainActivity : Activity() {
         ),
         "install" to listOf("Zainstaluj głos", "Install voice", "Instalēt balsi"),
         "close" to listOf("Zamknij", "Close", "Aizvērt"),
-        "noTts" to listOf("Syntezator mowy nie jest gotowy.", "Text-to-speech is not ready.", "Teksta pārveide runā nav gatava.")
+        "noTts" to listOf("Syntezator mowy nie jest gotowy.", "Text-to-speech is not ready.", "Teksta pārveide runā nav gatava."),
+        // zakładki i ekran Info
+        "tabHome" to listOf("Menu", "Menu", "Izvēlne"),
+        "tabInfo" to listOf("Info", "Info", "Info"),
+        "infoTitle" to listOf("Informacje o aplikacji", "About the app", "Par lietotni"),
+        "appData" to listOf("DANE APLIKACJI", "APP DATA", "LIETOTNES DATI"),
+        "version" to listOf("Wersja", "Version", "Versija"),
+        "sentencesLbl" to listOf("Liczba zdań", "Sentences", "Teikumu skaits"),
+        "catsLbl" to listOf("Kategorie", "Categories", "Kategorijas"),
+        "levelsLbl" to listOf("Poziomy", "Levels", "Līmeņi"),
+        "voiceLbl" to listOf("Głos", "Voice", "Balss"),
+        "voiceVal" to listOf("Syntezator mowy Androida", "Android text-to-speech", "Android teksta pārveide runā"),
+        "langsLbl" to listOf("Języki menu", "Menu languages", "Izvēlnes valodas"),
+        "internetLbl" to listOf("Internet", "Internet", "Internets"),
+        "internetVal" to listOf("Niepotrzebny po pobraniu głosów", "Not needed once voices are downloaded", "Nav vajadzīgs pēc balsu lejupielādes"),
+        "authorHdr" to listOf("AUTOR", "AUTHOR", "AUTORS"),
+        "authorLbl" to listOf("Autor", "Author", "Autors"),
+        "siteLbl" to listOf("Strona WWW", "Website", "Mājaslapa"),
+        "openSite" to listOf("🌐  Odwiedź artsoft.xo.je", "🌐  Visit artsoft.xo.je", "🌐  Apmeklēt artsoft.xo.je"),
+        "rights" to listOf("© 2026 Artsoft. Wszelkie prawa zastrzeżone.", "© 2026 Artsoft. All rights reserved.", "© 2026 Artsoft. Visas tiesības aizsargātas.")
     )
 
     // nagrody: próg punktów, ikona, nazwa PL/EN/LV
@@ -129,12 +171,17 @@ class MainActivity : Activity() {
     private var roundGain = 0
     private var streak = 0
 
+    private fun appVer(): String =
+        try { packageManager.getPackageInfo(packageName, 0).versionName ?: "?" } catch (e: Exception) { "?" }
+
     private fun t(key: String): String = str[key]?.get(uiLang) ?: key
     private fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
 
     // ---------- cykl życia ----------
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.statusBarColor = cBg
+        window.navigationBarColor = cBar
         prefs = getSharedPreferences("rozmowki", Context.MODE_PRIVATE)
         uiLang = prefs.getInt("lang", 0)
         rate = prefs.getFloat("rate", 1.0f)
@@ -172,7 +219,7 @@ class MainActivity : Activity() {
     override fun onBackPressed() {
         when (screenName) {
             "home" -> super.onBackPressed()
-            "cat" -> showHome()
+            "cat", "info" -> showHome()
             else -> if (currentCat != null) showCategory(currentCat!!) else showHome()
         }
     }
@@ -231,7 +278,7 @@ class MainActivity : Activity() {
     }
 
     private fun showNoLatvian() {
-        AlertDialog.Builder(this)
+        AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert)
             .setMessage(t("noLv"))
             .setPositiveButton(t("install")) { _, _ ->
                 try {
@@ -244,67 +291,169 @@ class MainActivity : Activity() {
             .show()
     }
 
-    // ---------- pomocnicze widoki ----------
-    private fun screen(name: String, build: LinearLayout.() -> Unit) {
-        stopAudio()
-        screenName = name
-        val col = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(dp(16), dp(24), dp(16), dp(24))
-        }
-        col.build()
-        setContentView(ScrollView(this).apply {
-            setBackgroundColor(Color.parseColor("#F4F6FA"))
-            addView(col, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
-        })
+    // ---------- styl: tła i przyciski ----------
+    private fun shape(fill: Int, stroke: Int): GradientDrawable = GradientDrawable().apply {
+        setColor(fill)
+        cornerRadius = dp(14).toFloat()
+        setStroke(dp(1), stroke)
     }
 
-    private fun LinearLayout.label(text: String, sp: Float = 16f, bold: Boolean = false, color: Int = Color.parseColor("#1B2333")): TextView {
+    // stany: 0 zwykły, 1 wybrany (zielony pasek), 2 dobrze, 3 źle, 4 główny (zielony)
+    private fun bg(state: Int): Drawable = when (state) {
+        1 -> LayerDrawable(arrayOf<Drawable>(shape(cGreen, cGreen), shape(cCardSel, cCardSel))).apply {
+            setLayerInset(1, dp(5), 0, 0, 0)
+        }
+        2 -> shape(Color.parseColor("#12391F"), cGreen)
+        3 -> shape(Color.parseColor("#3B1519"), Color.parseColor("#EF4444"))
+        4 -> shape(cGreen, cGreen)
+        else -> shape(cCard, cStroke)
+    }
+
+    private fun styleBtn(b: Button, state: Int) {
+        b.background = bg(state)
+        b.setTextColor(if (state == 4) Color.parseColor("#06210F") else cText)
+    }
+
+    private fun makeButton(text: String, state: Int = 0, small: Boolean = false, left: Boolean = false, onClick: () -> Unit): Button =
+        Button(this).apply {
+            this.text = text
+            isAllCaps = false
+            stateListAnimator = null
+            minWidth = 0
+            minimumWidth = 0
+            minHeight = 0
+            minimumHeight = 0
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, if (small) 14f else 16f)
+            setTypeface(typeface, Typeface.BOLD)
+            if (small) setPadding(dp(4), dp(13), dp(4), dp(13)) else setPadding(dp(14), dp(14), dp(14), dp(14))
+            gravity = if (left) (Gravity.START or Gravity.CENTER_VERTICAL) else Gravity.CENTER
+            styleBtn(this, state)
+            setOnClickListener { onClick() }
+        }
+
+    private fun LinearLayout.label(text: String, sp: Float = 16f, bold: Boolean = false, color: Int = cText): TextView {
         val tv = TextView(this@MainActivity).apply {
             this.text = text
             setTextSize(TypedValue.COMPLEX_UNIT_SP, sp)
             setTextColor(color)
             if (bold) setTypeface(typeface, Typeface.BOLD)
-            setPadding(0, dp(6), 0, dp(6))
+            setPadding(dp(2), dp(6), dp(2), dp(6))
         }
         addView(tv, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
         return tv
     }
 
-    private fun makeButton(text: String, selected: Boolean = false, onClick: () -> Unit): Button =
-        Button(this).apply {
-            this.text = text
-            isAllCaps = false
-            setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
-            setTextColor(if (selected) Color.WHITE else Color.parseColor("#1B2333"))
-            setBackgroundColor(if (selected) Color.parseColor("#2F6FED") else Color.parseColor("#DCE3F2"))
-            setOnClickListener { onClick() }
-        }
+    private fun LinearLayout.section(text: String) {
+        val tv = label(text, 12f, true, cSub)
+        (tv.layoutParams as LinearLayout.LayoutParams).topMargin = dp(14)
+        tv.letterSpacing = 0.08f
+    }
 
-    private fun LinearLayout.button(text: String, selected: Boolean = false, onClick: () -> Unit): Button {
-        val b = makeButton(text, selected, onClick)
+    private fun LinearLayout.button(text: String, state: Int = 0, left: Boolean = false, onClick: () -> Unit): Button {
+        val b = makeButton(text, state, false, left, onClick)
         addView(b, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { topMargin = dp(8) })
         return b
     }
 
-    private fun LinearLayout.row(items: List<Triple<String, Boolean, () -> Unit>>) {
+    // wiersz przycisków: tekst, czy wybrany, akcja; opcjonalne wagi szerokości
+    private fun LinearLayout.row(items: List<Triple<String, Boolean, () -> Unit>>, weights: List<Float>? = null) {
         val r = LinearLayout(this@MainActivity).apply { orientation = LinearLayout.HORIZONTAL }
-        for ((text, sel, act) in items) {
-            r.addView(makeButton(text, sel, act), LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f).apply { marginEnd = dp(4) })
+        items.forEachIndexed { i, (text, sel, act) ->
+            val w = weights?.get(i) ?: 1f
+            val lp = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, w)
+            if (i < items.size - 1) lp.marginEnd = dp(6)
+            r.addView(makeButton(text, if (sel) 1 else 0, true) { act() }, lp)
         }
         addView(r, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { topMargin = dp(8) })
+    }
+
+    private fun LinearLayout.card(build: LinearLayout.() -> Unit) {
+        val c = LinearLayout(this@MainActivity).apply {
+            orientation = LinearLayout.VERTICAL
+            background = shape(cCard, cStroke)
+            setPadding(dp(16), dp(10), dp(16), dp(10))
+        }
+        c.build()
+        addView(c, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { topMargin = dp(8) })
+    }
+
+    private fun LinearLayout.infoRow(key: String, value: String) {
+        val r = LinearLayout(this@MainActivity).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(0, dp(8), 0, dp(8))
+        }
+        r.addView(TextView(this@MainActivity).apply {
+            text = key
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
+            setTextColor(cSub)
+        })
+        r.addView(TextView(this@MainActivity).apply {
+            text = value
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
+            setTextColor(cText)
+        })
+        addView(r, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+    }
+
+    // ekran z ewentualnym dolnym paskiem zakładek (Menu / Info)
+    private fun screen(name: String, tabs: Boolean = false, build: LinearLayout.() -> Unit) {
+        stopAudio()
+        screenName = name
+        val col = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(dp(16), dp(20), dp(16), dp(24))
+        }
+        col.build()
+        val scroll = ScrollView(this).apply {
+            setBackgroundColor(cBg)
+            addView(col, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+        }
+        val root = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setBackgroundColor(cBg)
+            addView(scroll, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f))
+            if (tabs) addView(tabBar(name), LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+        }
+        setContentView(root)
+    }
+
+    private fun tabBar(active: String): LinearLayout {
+        val bar = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            setBackgroundColor(cBar)
+        }
+        fun tab(text: String, on: Boolean, act: () -> Unit) {
+            val tv = TextView(this).apply {
+                this.text = text
+                gravity = Gravity.CENTER
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f)
+                setTypeface(typeface, Typeface.BOLD)
+                setTextColor(if (on) cGreen else cSub)
+                setPadding(0, dp(14), 0, dp(14))
+                setOnClickListener { act() }
+            }
+            bar.addView(tv, LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f))
+        }
+        tab("🏠  " + t("tabHome"), active == "home") { showHome() }
+        tab("ℹ️  " + t("tabInfo"), active == "info") { showInfo() }
+        return bar
     }
 
     // ---------- ekran główny ----------
     private fun showHome() {
         currentCat = null
-        screen("home") {
-            label(t("title"), 28f, true, Color.parseColor("#2F6FED"))
+        screen("home", true) {
+            label(t("title"), 28f, true)
+            label("${t("version")} ${appVer()}", 12f, false, cSub)
             val pts = prefs.getInt("points", 0)
             val earned = badges.filter { pts >= it.first }.joinToString(" ") { it.second }
-            label("⭐ ${t("points")}: $pts   🔥 ${t("streak")}: ${prefs.getInt("best", 0)}   $earned", 15f)
+            card {
+                label("⭐  ${t("points")}: $pts", 16f, true)
+                label("🔥  ${t("streak")}: ${prefs.getInt("best", 0)}", 16f, false, cSub)
+                if (earned.isNotEmpty()) label(earned, 22f)
+            }
 
-            label(t("lang"), 14f, true)
+            section(t("lang"))
             row(listOf("Polski", "English", "Latviešu").mapIndexed { i, n ->
                 Triple(n, uiLang == i) {
                     uiLang = i
@@ -313,27 +462,59 @@ class MainActivity : Activity() {
                 }
             })
 
-            label(t("level"), 14f, true)
+            section(t("level"))
             val lv = listOf("") + levels
             row(lv.map { l ->
                 Triple(if (l.isEmpty()) t("allLevels") else l, levelFilter == l) {
                     levelFilter = l
                     showHome()
                 }
-            })
+            }, listOf(1.9f, 1f, 1f, 1f, 1f, 1f))
 
-            label(t("speed"), 14f, true)
+            section(t("speed"))
             row(listOf(
                 Triple(t("slow"), rate < 0.9f) { rate = 0.7f; prefs.edit().putFloat("rate", rate).apply(); showHome() },
                 Triple(t("normal"), rate >= 0.9f) { rate = 1.0f; prefs.edit().putFloat("rate", rate).apply(); showHome() }
             ))
 
-            label(t("cats"), 18f, true)
+            section(t("cats"))
             for (c in cats) {
                 val n = pool(c.id).size
-                button("${c.names[uiLang]}  ($n)") { showCategory(c.id) }
+                button("${c.names[uiLang]}   ·   $n", 0, true) { showCategory(c.id) }
             }
-            button(t("game")) { startQuiz(null) }
+            button(t("game"), 4) { startQuiz(null) }
+        }
+    }
+
+    // ---------- ekran Info ----------
+    private fun showInfo() {
+        currentCat = null
+        val ver = appVer()
+        screen("info", true) {
+            label(t("infoTitle"), 26f, true)
+
+            section(t("appData"))
+            card {
+                infoRow(t("version"), ver)
+                infoRow(t("sentencesLbl"), all.size.toString())
+                infoRow(t("catsLbl"), cats.size.toString())
+                infoRow(t("levelsLbl"), levels.joinToString(", "))
+                infoRow(t("langsLbl"), "Polski, English, Latviešu")
+                infoRow(t("voiceLbl"), t("voiceVal"))
+                infoRow(t("internetLbl"), t("internetVal"))
+            }
+
+            section(t("authorHdr"))
+            card {
+                infoRow(t("authorLbl"), "Artsoft")
+                infoRow(t("siteLbl"), "artsoft.xo.je")
+            }
+            button(t("openSite"), 4) {
+                try {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://artsoft.xo.je")))
+                } catch (e: Exception) { }
+            }
+            label(t("rights"), 12f, false, cSub).gravity = Gravity.CENTER
         }
     }
 
@@ -344,23 +525,36 @@ class MainActivity : Activity() {
         val items = pool(id)
         screen("cat") {
             button(t("back")) { showHome() }
-            label(cat.names[uiLang], 24f, true, Color.parseColor("#2F6FED"))
-            button(t("cont")) { startContinuous(id) }
+            label(cat.names[uiLang], 24f, true).also {
+                (it.layoutParams as LinearLayout.LayoutParams).topMargin = dp(10)
+            }
+            button(t("cont"), 4) { startContinuous(id) }
             button(t("quiz")) { startQuiz(id) }
-            label(t("list"), 14f, true)
+            section(t("list"))
             for (s in items) {
+                val sb = SpannableStringBuilder()
+                val tag = s.level + "\n"
+                sb.append(tag)
+                sb.setSpan(ForegroundColorSpan(cSub), 0, tag.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                sb.setSpan(RelativeSizeSpan(0.8f), 0, tag.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                val a = sb.length
+                sb.append(s.en + "\n")
+                sb.setSpan(ForegroundColorSpan(cText), a, sb.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                sb.setSpan(StyleSpan(Typeface.BOLD), a, sb.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                val b = sb.length
+                sb.append(s.lv)
+                sb.setSpan(ForegroundColorSpan(cLv), b, sb.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 val tv = TextView(this@MainActivity).apply {
-                    text = "${s.level}  ·  ${s.en}\n${s.lv}"
+                    text = sb
                     setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
-                    setTextColor(Color.parseColor("#1B2333"))
-                    setBackgroundColor(Color.WHITE)
-                    setPadding(dp(12), dp(10), dp(12), dp(10))
+                    background = shape(cCard, cStroke)
+                    setPadding(dp(14), dp(10), dp(14), dp(12))
                     setOnClickListener {
                         singleLv = s.lv
                         say(s.en, EN, "s_en")
                     }
                 }
-                addView(tv, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { topMargin = dp(6) })
+                addView(tv, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { topMargin = dp(8) })
             }
         }
     }
@@ -375,22 +569,26 @@ class MainActivity : Activity() {
         screen("cont") {
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
             button(t("back")) { showCategory(id) }
-            label(cats.first { it.id == id }.names[uiLang], 20f, true, Color.parseColor("#2F6FED"))
-            contInfo = label("", 14f)
-            contEn = label("", 26f, true)
-            contLv = label("", 24f, false, Color.parseColor("#B3261E"))
+            label(cats.first { it.id == id }.names[uiLang], 20f, true).also {
+                (it.layoutParams as LinearLayout.LayoutParams).topMargin = dp(10)
+            }
+            card {
+                contInfo = label("", 13f, false, cSub)
+                contEn = label("", 26f, true)
+                contLv = label("", 24f, false, cLv)
+            }
+            row(listOf(
+                Triple("⏮", false) { contJump(-1) },
+                Triple("⏭", false) { contJump(1) }
+            ))
             row(listOf(
                 Triple(t("order"), !shuffleMode) { shuffleMode = false; startContinuous(id) },
                 Triple(t("shuffle"), shuffleMode) { shuffleMode = true; startContinuous(id) }
             ))
-            label(t("gap"), 14f, true)
+            section(t("gap"))
             row(listOf(
                 Triple(t("short"), gapMs < 2000L) { gapMs = 1200L; startContinuous(id) },
                 Triple(t("long"), gapMs >= 2000L) { gapMs = 3000L; startContinuous(id) }
-            ))
-            row(listOf(
-                Triple("⏮", false) { contJump(-1) },
-                Triple("⏭", false) { contJump(1) }
             ))
             button(t("stop")) { stopAudio() }
         }
@@ -444,7 +642,9 @@ class MainActivity : Activity() {
         val options = (wrong + q.lv).shuffled()
         screen("quiz") {
             button(t("back")) { if (cat == null) showHome() else showCategory(cat) }
-            label("${t("question")} ${qi + 1} / ${quizList.size}    ⭐ ${prefs.getInt("points", 0)}    🔥 $streak", 14f, true)
+            label("${t("question")} ${qi + 1} / ${quizList.size}     ⭐ ${prefs.getInt("points", 0)}     🔥 $streak", 14f, true, cSub).also {
+                (it.layoutParams as LinearLayout.LayoutParams).topMargin = dp(10)
+            }
             val enView = label(if (listenOnly) "🎧" else q.en, 24f, true)
             row(listOf(
                 Triple(t("repeat"), false) { say(q.en, EN, "q") },
@@ -453,17 +653,17 @@ class MainActivity : Activity() {
                     showQuestion(cat)
                 }
             ))
-            label(t("pickLv"), 14f, true)
+            section(t("pickLv"))
             val buttons = ArrayList<Button>()
             val feedback = label("", 16f, true)
-            val nextBtn = makeButton(t("next")) { qi++; showQuestion(cat) }
-            nextBtn.visibility = android.view.View.GONE
+            val nextBtn = makeButton(t("next"), 4) { qi++; showQuestion(cat) }
+            nextBtn.visibility = View.GONE
             for (o in options) {
-                val b = makeButton(o) {}
+                val b = makeButton(o, 0, false, true) {}
                 b.setOnClickListener {
                     for (x in buttons) {
                         x.isEnabled = false
-                        if (x.text.toString() == q.lv) x.setBackgroundColor(Color.parseColor("#9BE3A5"))
+                        if (x.text.toString() == q.lv) styleBtn(x, 2)
                     }
                     if (o == q.lv) {
                         streak++
@@ -474,15 +674,15 @@ class MainActivity : Activity() {
                         prefs.edit().putInt("points", total).apply()
                         if (streak > prefs.getInt("best", 0)) prefs.edit().putInt("best", streak).apply()
                         feedback.text = "${t("good")}  +$gain"
-                        feedback.setTextColor(Color.parseColor("#1B7F2A"))
+                        feedback.setTextColor(cGreen)
                     } else {
                         streak = 0
-                        b.setBackgroundColor(Color.parseColor("#F4A3A0"))
+                        styleBtn(b, 3)
                         feedback.text = t("bad")
-                        feedback.setTextColor(Color.parseColor("#B3261E"))
+                        feedback.setTextColor(Color.parseColor("#F87171"))
                     }
                     enView.text = q.en
-                    nextBtn.visibility = android.view.View.VISIBLE
+                    nextBtn.visibility = View.VISIBLE
                     say(q.lv, LV, "q")
                 }
                 buttons.add(b)
@@ -502,16 +702,18 @@ class MainActivity : Activity() {
         }
         val pts = prefs.getInt("points", 0)
         screen("end") {
-            label(t("roundEnd"), 26f, true, Color.parseColor("#2F6FED"))
-            label(stars, 40f)
-            label("${t("score")}: $roundScore / ${quizList.size}", 20f, true)
-            label("${t("earned")}: +$roundGain", 18f)
-            label("${t("points")}: $pts", 18f)
-            val earned = badges.filter { pts >= it.first }
-            if (earned.isNotEmpty()) {
-                label("${t("badges")}: " + earned.joinToString("  ") { "${it.second} ${it.third[uiLang]}" }, 16f)
+            label(t("roundEnd"), 26f, true)
+            card {
+                label(stars, 40f).gravity = Gravity.CENTER
+                label("${t("score")}: $roundScore / ${quizList.size}", 20f, true)
+                label("${t("earned")}: +$roundGain", 18f, false, cLv)
+                label("${t("points")}: $pts", 18f)
+                val earned = badges.filter { pts >= it.first }
+                if (earned.isNotEmpty()) {
+                    label("${t("badges")}: " + earned.joinToString("  ") { "${it.second} ${it.third[uiLang]}" }, 16f, false, cSub)
+                }
             }
-            button(t("again")) { startQuiz(cat) }
+            button(t("again"), 4) { startQuiz(cat) }
             button(t("back")) { if (cat == null) showHome() else showCategory(cat) }
         }
     }
