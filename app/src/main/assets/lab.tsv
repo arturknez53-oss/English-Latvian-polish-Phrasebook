@@ -1,0 +1,99 @@
+A2	I work in the laboratory.	Es strādāju laboratorijā.	Pracuję w laboratorium.
+A2	Put on a lab coat.	Uzvelc laboratorijas halātu.	Załóż fartuch laboratoryjny.
+A2	Wear gloves and safety glasses.	Valkā cimdus un aizsargbrilles.	Noś rękawice i okulary ochronne.
+A2	This is a sample.	Šis ir paraugs.	To jest próbka.
+A2	Write the sample number here.	Uzraksti šeit parauga numuru.	Wpisz tutaj numer próbki.
+A2	Where is the microscope?	Kur ir mikroskops?	Gdzie jest mikroskop?
+A2	The table must be clean.	Galdam jābūt tīram.	Stół musi być czysty.
+A2	Do not eat in the laboratory.	Laboratorijā neēd.	Nie jedz w laboratorium.
+A2	The fridge is cold.	Ledusskapis ir auksts.	Lodówka jest zimna.
+A2	Please close the box.	Lūdzu, aizver kārbu.	Proszę zamknąć pudełko.
+A2	Count the seeds.	Saskaiti sēklas.	Policz nasiona.
+A2	How many seeds are there?	Cik sēklu ir?	Ile jest nasion?
+A2	The result is negative.	Rezultāts ir negatīvs.	Wynik jest ujemny.
+A2	The result is positive.	Rezultāts ir pozitīvs.	Wynik jest dodatni.
+A2	I need a new pipette tip.	Man vajag jaunu pipetes uzgali.	Potrzebuję nowej końcówki do pipety.
+A2	Do not touch this.	Neaiztiec šo.	Nie dotykaj tego.
+A2	The machine is on.	Aparāts ir ieslēgts.	Maszyna jest włączona.
+A2	Wash your hands, please.	Lūdzu, nomazgā rokas.	Proszę umyć ręce.
+A2	The test takes two days.	Tests ilgst divas dienas.	Test trwa dwa dni.
+A2	Put the sample in the fridge.	Ieliec paraugu ledusskapī.	Włóż próbkę do lodówki.
+B1	Please label every tube with the date and the sample number.	Lūdzu, apzīmē katru mēģeni ar datumu un parauga numuru.	Proszę opisać każdą probówkę datą i numerem próbki.
+B1	We test the seeds for diseases.	Mēs pārbaudām sēklas uz slimībām.	Badamy nasiona pod kątem chorób.
+B1	The samples arrive in the morning.	Paraugi ierodas no rīta.	Próbki przychodzą rano.
+B1	I prepare the solutions according to the protocol.	Es sagatavoju šķīdumus pēc protokola.	Przygotowuję roztwory zgodnie z protokołem.
+B1	Please measure exactly one millilitre.	Lūdzu, nomēri tieši vienu mililitru.	Proszę odmierzyć dokładnie jeden mililitr.
+B1	The equipment must be cleaned after use.	Aprīkojums pēc lietošanas jānotīra.	Sprzęt musi zostać wyczyszczony po użyciu.
+B1	Do not open the tubes outside the safety cabinet.	Neatver mēģenes ārpus drošības kameras.	Nie otwieraj probówek poza komorą bezpieczeństwa.
+B1	Always use sterile tools.	Vienmēr izmanto sterilus instrumentus.	Zawsze używaj sterylnych narzędzi.
+B1	Write all the results in the register.	Ieraksti visus rezultātus reģistrā.	Wpisz wszystkie wyniki do rejestru.
+B1	The centrifuge is noisy but it works well.	Centrifūga ir trokšņaina, bet labi darbojas.	Wirówka jest głośna, ale dobrze działa.
+B1	Please check the temperature of the incubator.	Lūdzu, pārbaudi inkubatora temperatūru.	Proszę sprawdzić temperaturę w inkubatorze.
+B1	Seeds must be kept clean and dry.	Sēklas jāuzglabā tīras un sausas.	Nasiona muszą być utrzymywane w czystości i suchości.
+B1	The waste must be thrown away in the right container.	Atkritumi jāizmet pareizajā tvertnē.	Odpady należy wyrzucać do odpowiedniego pojemnika.
+B1	I will repeat the test tomorrow.	Es rīt atkārtošu testu.	Powtórzę test jutro.
+B1	The sample was damaged during transport.	Paraugs transportēšanas laikā tika bojāts.	Próbka została uszkodzona podczas transportu.
+B1	Ask your colleague if you have any questions.	Ja ir jautājumi, jautā savam kolēģim.	Jeśli masz pytania, zapytaj kolegę.
+B1	You have to follow the work instructions step by step.	Darba instrukcijas jāievēro soli pa solim.	Musisz postępować zgodnie z instrukcją pracy krok po kroku.
+B1	The germination test shows how many seeds will grow.	Dīgtspējas tests parāda, cik sēklu uzdīgs.	Test kiełkowania pokazuje, ile nasion wykiełkuje.
+B1	The lab is only open to authorised persons.	Laboratorija ir pieejama tikai pilnvarotām personām.	Laboratorium jest dostępne tylko dla osób upoważnionych.
+B1	I need to calibrate the scale.	Man jākalibrē svari.	Muszę skalibrować wagę.
+B2	The laboratory is authorised to carry out seed health analyses according to approved protocols.	Laboratorija ir pilnvarota veikt sēklu veselības analīzes saskaņā ar apstiprinātiem protokoliem.	Laboratorium jest upoważnione do wykonywania analiz zdrowotności nasion według zatwierdzonych protokołów.
+B2	We extract the DNA from the sample before running the PCR.	Mēs izdalām DNS no parauga, pirms veicam PCR.	Przed wykonaniem PCR izolujemy DNA z próbki.
+B2	A positive control and a negative control are included in every run.	Katrā analīzē tiek iekļauta pozitīvā un negatīvā kontrole.	W każdym przebiegu uwzględnia się kontrolę dodatnią i ujemną.
+B2	If the control fails, the whole test has to be repeated.	Ja kontrole nenostrādā, viss tests jāatkārto.	Jeśli kontrola zawiedzie, cały test trzeba powtórzyć.
+B2	The seed lot is divided into sub-samples before testing.	Sēklu partija pirms testēšanas tiek sadalīta apakšparaugos.	Partia nasion jest dzielona na podpróbki przed badaniem.
+B2	Detection of the bacterium requires a very sensitive method.	Baktērijas noteikšanai nepieciešama ļoti jutīga metode.	Wykrycie bakterii wymaga bardzo czułej metody.
+B2	Any deviation from the protocol must be reported to the quality manager.	Par katru atkāpi no protokola jāziņo kvalitātes vadītājam.	Każde odstępstwo od protokołu należy zgłosić kierownikowi jakości.
+B2	All results are entered into the system and checked by a second person.	Visi rezultāti tiek ievadīti sistēmā, un tos pārbauda otra persona.	Wszystkie wyniki są wprowadzane do systemu i sprawdzane przez drugą osobę.
+B2	The workstation has to be disinfected before and after each analysis.	Darba vieta pirms un pēc katras analīzes jādezinficē.	Stanowisko pracy należy zdezynfekować przed każdą analizą i po niej.
+B2	The seeds are ground and mixed with a buffer solution.	Sēklas tiek samaltas un sajauktas ar buferšķīdumu.	Nasiona są mielone i mieszane z roztworem buforowym.
+B2	The extract is incubated at a constant temperature overnight.	Ekstrakts tiek inkubēts nemainīgā temperatūrā pa nakti.	Ekstrakt jest inkubowany przez noc w stałej temperaturze.
+B2	We cannot release the batch until the results are confirmed.	Mēs nevaram izlaist partiju, kamēr rezultāti nav apstiprināti.	Nie możemy zwolnić partii, dopóki wyniki nie zostaną potwierdzone.
+B2	Please make sure the pipettes are calibrated regularly.	Lūdzu, pārliecinies, ka pipetes tiek regulāri kalibrētas.	Proszę dopilnować, aby pipety były regularnie kalibrowane.
+B2	The risk of contamination is highest while opening the samples.	Piesārņojuma risks ir vislielākais, atverot paraugus.	Ryzyko zanieczyszczenia jest największe podczas otwierania próbek.
+B2	The test is performed in duplicate to rule out errors.	Tests tiek veikts divkāršā atkārtojumā, lai izslēgtu kļūdas.	Test wykonuje się w dwóch powtórzeniach, aby wykluczyć błędy.
+B2	Used consumables must be disposed of as biological waste.	Izlietotie palīgmateriāli jāutilizē kā bioloģiskie atkritumi.	Zużyte materiały eksploatacyjne należy utylizować jako odpady biologiczne.
+B2	The germination rate has to meet the required standard.	Dīgtspējas procentam jāatbilst prasītajam standartam.	Współczynnik kiełkowania musi spełniać wymagany standard.
+B2	Reagents should be stored at the temperature indicated on the label.	Reaģenti jāuzglabā uz etiķetes norādītajā temperatūrā.	Odczynniki należy przechowywać w temperaturze wskazanej na etykiecie.
+B2	The microscope is used to inspect the seedlings for abnormalities.	Mikroskopu izmanto, lai pārbaudītu dīgstus uz anomālijām.	Mikroskop służy do oceny siewek pod kątem nieprawidłowości.
+B2	Please keep your bench tidy and your notes up to date.	Lūdzu, uzturi savu darba galdu kārtībā un piezīmes aktuālas.	Proszę utrzymywać porządek na stanowisku i aktualizować notatki.
+C1	The phytosanitary laboratory operates under strict supervision of the competent authority.	Fitosanitārā laboratorija darbojas kompetentās iestādes stingrā uzraudzībā.	Laboratorium fitosanitarne działa pod ścisłym nadzorem właściwego organu.
+C1	Our quality management system relies on documented procedures and clearly defined work instructions.	Mūsu kvalitātes vadības sistēma balstās uz dokumentētām procedūrām un skaidri definētām darba instrukcijām.	Nasz system zarządzania jakością opiera się na udokumentowanych procedurach i jasno określonych instrukcjach pracy.
+C1	An independent auditor periodically reviews whether every step complies with the standard.	Neatkarīgs auditors periodiski pārbauda, vai katrs solis atbilst standartam.	Niezależny audytor okresowo sprawdza, czy każdy etap jest zgodny z normą.
+C1	False negatives are potentially far more damaging than false positives.	Viltus negatīvi rezultāti var būt daudz kaitīgāki nekā viltus pozitīvi.	Wyniki fałszywie ujemne są potencjalnie znacznie groźniejsze niż fałszywie dodatnie.
+C1	The assay was validated before being introduced into routine testing.	Analīze tika validēta, pirms to ieviesa ikdienas testēšanā.	Test został zwalidowany przed wprowadzeniem do rutynowych badań.
+C1	Detection limits depend on the sample size and the sensitivity of the method.	Noteikšanas robežas ir atkarīgas no parauga lieluma un metodes jutības.	Granice wykrywalności zależą od wielkości próbki i czułości metody.
+C1	Genetic monitoring of the virus helps us track new clusters as they emerge.	Vīrusa ģenētiskā monitorēšana palīdz mums izsekot jauniem klasteriem, tiem rodoties.	Monitoring genetyczny wirusa pomaga nam śledzić nowe skupiska w miarę ich pojawiania się.
+C1	We must be able to trace every result back to the original seed lot.	Mums jāspēj katru rezultātu izsekot līdz sākotnējai sēklu partijai.	Musimy móc prześledzić każdy wynik do pierwotnej partii nasion.
+C1	Even trace levels of contamination can invalidate a whole series of tests.	Pat nelieli piesārņojuma daudzumi var padarīt nederīgu veselu testu sēriju.	Nawet śladowe zanieczyszczenie może unieważnić całą serię badań.
+C1	The technician is responsible for maintaining the equipment in a validated state.	Tehniķis ir atbildīgs par aprīkojuma uzturēšanu validētā stāvoklī.	Technik odpowiada za utrzymanie sprzętu w stanie zwalidowanym.
+C1	The data must be recorded contemporaneously, legibly and without alteration.	Dati jāreģistrē vienlaikus ar notikumiem, salasāmi un bez labojumiem.	Dane muszą być zapisywane na bieżąco, czytelnie i bez zmian.
+C1	A thorough risk assessment precedes the introduction of any new method.	Jebkuras jaunas metodes ieviešanai priekšā iet rūpīgs riska novērtējums.	Wprowadzenie każdej nowej metody poprzedza gruntowna ocena ryzyka.
+C1	Cross-contamination is prevented by working in a strict order from clean to dirty areas.	Krusteniskā piesārņojuma novēršanai strādā stingrā secībā no tīrām uz netīrām zonām.	Zanieczyszczeniu krzyżowemu zapobiega praca w ścisłej kolejności od stref czystych do brudnych.
+C1	The accuracy of the result depends on the quality of the reagents.	Rezultāta precizitāte ir atkarīga no reaģentu kvalitātes.	Dokładność wyniku zależy od jakości odczynników.
+C1	Non-conformities are logged and followed up with corrective actions.	Neatbilstības tiek reģistrētas un tām seko korektīvas darbības.	Niezgodności są rejestrowane i skutkują działaniami korygującymi.
+C1	Staff are trained regularly to ensure their competence is up to date.	Darbinieki tiek regulāri apmācīti, lai viņu kompetence būtu aktuāla.	Pracownicy są regularnie szkoleni, aby ich kompetencje były aktualne.
+C1	Test methods used in seed health analysis are often standardised internationally.	Sēklu veselības analīzē izmantotās metodes bieži ir starptautiski standartizētas.	Metody badawcze stosowane w analizie zdrowotności nasion są często ujednolicone na poziomie międzynarodowym.
+C1	A batch should not be shipped unless all required analyses are complete.	Partiju nedrīkst nosūtīt, kamēr nav pabeigtas visas nepieciešamās analīzes.	Partii nie należy wysyłać, dopóki nie zostaną ukończone wszystkie wymagane analizy.
+C1	Accurate interpretation of results demands both experience and a critical mindset.	Precīza rezultātu interpretācija prasa gan pieredzi, gan kritisku domāšanu.	Trafna interpretacja wyników wymaga zarówno doświadczenia, jak i krytycznego myślenia.
+C2	Notwithstanding the sensitivity of modern assays, an inadequately sampled lot may still yield misleading results.	Neraugoties uz mūsdienu analīžu jutību, nepietiekami noņemta partija joprojām var dot maldinošus rezultātus.	Mimo czułości nowoczesnych testów niewłaściwie pobrana próba partii może nadal dawać mylące wyniki.
+C2	Had the negative control not been included, the contamination would have gone unnoticed.	Ja negatīvā kontrole nebūtu iekļauta, piesārņojums būtu palicis nepamanīts.	Gdyby nie uwzględniono kontroli ujemnej, zanieczyszczenie pozostałoby niezauważone.
+C2	The validity of a laboratory's findings rests on the integrity of its documentation.	Laboratorijas secinājumu derīgums balstās uz tās dokumentācijas integritāti.	Wiarygodność ustaleń laboratorium opiera się na rzetelności jego dokumentacji.
+C2	It is incumbent on every analyst to flag any anomaly, however minor it may appear.	Katra analītiķa pienākums ir norādīt uz jebkuru anomāliju, lai cik niecīga tā šķistu.	Obowiązkiem każdego analityka jest zgłoszenie każdej anomalii, choćby wydawała się drobna.
+C2	The distinction between a presumptive and a confirmed result is far from semantic.	Atšķirība starp provizorisku un apstiprinātu rezultātu nebūt nav tikai terminoloģiska.	Różnica między wynikiem wstępnym a potwierdzonym nie jest bynajmniej semantyczna.
+C2	Reproducibility, rather than mere speed, is the true measure of a robust analytical method.	Atkārtojamība, nevis tikai ātrums, ir stabilas analītiskās metodes patiesais mērs.	Powtarzalność, a nie sama szybkość, jest prawdziwą miarą solidnej metody analitycznej.
+C2	The protocol, though exacting, leaves little room for ambiguity, which is precisely its virtue.	Protokols, kaut arī prasīgs, atstāj maz vietas neskaidrībām, un tieši tā ir tā priekšrocība.	Protokół, choć wymagający, pozostawia niewiele miejsca na dwuznaczność, i na tym polega jego zaleta.
+C2	Before any decision is taken, the data should be scrutinised for outliers and systematic bias.	Pirms jebkura lēmuma pieņemšanas dati jāpārbauda uz novirzēm un sistemātisku nobīdi.	Zanim zapadnie jakakolwiek decyzja, dane należy przeanalizować pod kątem wartości odstających i błędu systematycznego.
+C2	The lab's accreditation hinges on its demonstrable ability to deliver consistent results.	Laboratorijas akreditācija ir atkarīga no tās pierādāmās spējas nodrošināt konsekventus rezultātus.	Akredytacja laboratorium zależy od jego wykazanej zdolności do uzyskiwania spójnych wyników.
+C2	One must resist the temptation to rationalise an inconvenient result.	Jāpretojas kārdinājumam racionalizēt neērtu rezultātu.	Należy oprzeć się pokusie racjonalizowania niewygodnego wyniku.
+C2	An unexpected signal in the control well warrants an immediate halt to the run.	Negaidīts signāls kontroles iedobē ir pamats nekavējoties pārtraukt analīzi.	Nieoczekiwany sygnał w studzience kontrolnej wymaga natychmiastowego przerwania przebiegu.
+C2	The inherent variability of biological material demands cautious statistical interpretation.	Bioloģiskā materiāla raksturīgā mainība prasa piesardzīgu statistisko interpretāciju.	Wrodzona zmienność materiału biologicznego wymaga ostrożnej interpretacji statystycznej.
+C2	Sample integrity can be compromised by something as innocuous as a delay in transit.	Parauga integritāti var apdraudēt kaut kas tik nevainīgs kā aizkavēšanās transportā.	Integralność próbki może zostać naruszona przez coś tak niewinnego, jak opóźnienie w transporcie.
+C2	The release of a seed lot is a decision that carries commercial, regulatory and reputational consequences.	Sēklu partijas izlaišana ir lēmums, kam ir komerciālas, regulatīvas un reputācijas sekas.	Zwolnienie partii nasion to decyzja niosąca konsekwencje handlowe, regulacyjne i wizerunkowe.
+C2	A culture of openness encourages analysts to admit errors before they propagate downstream.	Atklātības kultūra mudina analītiķus atzīt kļūdas, pirms tās izplatās tālāk.	Kultura otwartości zachęca analityków do przyznawania się do błędów, zanim się rozprzestrzenią.
+C2	The shift towards automation has not diminished the need for sound manual technique.	Pāreja uz automatizāciju nav mazinājusi vajadzību pēc drošas manuālās tehnikas.	Przejście na automatyzację nie zmniejszyło potrzeby solidnej techniki manualnej.
+C2	Strict adherence to hygiene is non-negotiable where a single contaminated sample could mislead an entire programme.	Stingra higiēnas ievērošana nav apspriežama, ja viens piesārņots paraugs var maldināt visu programmu.	Ścisłe przestrzeganie higieny jest nienegocjowalne tam, gdzie jedna zanieczyszczona próbka może zmylić cały program.
+C2	Epidemiological data, when combined with laboratory findings, paint a more complete picture of the threat.	Epidemioloģiskie dati kopā ar laboratorijas atradumiem sniedz pilnīgāku priekšstatu par draudiem.	Dane epidemiologiczne w połączeniu z wynikami laboratoryjnymi dają pełniejszy obraz zagrożenia.
+C2	The ability to remain meticulous through repetitive tasks is what distinguishes a first-rate technician.	Spēja saglabāt precizitāti atkārtotu uzdevumu laikā atšķir pirmšķirīgu tehniķi.	Umiejętność zachowania skrupulatności przy powtarzalnych zadaniach wyróżnia pierwszorzędnego technika.
+C2	Ultimately, our customers rely on the assurance that every seed we deliver has been rigorously tested.	Galu galā mūsu klienti paļaujas uz pārliecību, ka katra mūsu piegādātā sēkla ir rūpīgi pārbaudīta.	Ostatecznie nasi klienci polegają na pewności, że każde dostarczone nasiono zostało rygorystycznie przebadane.
